@@ -2,7 +2,7 @@
 
 void mostrar_menu() {
   printf("\n-- ATENDIMENTO DE SAÚDE --\n");
-  printf("\n---------- MENU ----------\n");
+  printf("\n---- Hospital da FEI ----\n");
   printf("1. Cadastrar paciente\n");
   printf("2. Atendimento\n");
   printf("3. Atendimento prioritário\n");
