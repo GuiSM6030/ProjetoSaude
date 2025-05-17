@@ -1,7 +1,7 @@
-// main.c
 #include <stdio.h>
 #include <stdlib.h>
 #include "lista.h"
+#include "fila.h"
 
 void mostrar_menu()
 {
@@ -81,8 +81,68 @@ void submenu_cadastrar(Lista *lista)
   } while (opcao != 0);
 }
 
+void submenu_atendimento(Lista *lista, Fila *fila)
+{
+  int opcao;
+  do
+  {
+    printf("\n--- ATENDIMENTO ---\n");
+    printf("1. Enfileirar paciente\n");
+    printf("2. Desenfileirar paciente\n");
+    printf("3. Mostrar fila\n");
+    printf("0. Voltar\n");
+    printf("Escolha: ");
+    scanf("%d", &opcao);
+
+    while (getchar() != '\n')
+      ;
+
+    switch (opcao)
+    {
+    case 1:
+    {
+      char rg[20];
+      printf("\nDigite o RG do paciente: ");
+      scanf("%s", rg);
+      Registro *paciente = consultar_paciente(lista, rg);
+      if (paciente != NULL)
+      {
+        enfileirar(fila, paciente);
+        printf("\n%s entrou na fila!\n", paciente->nome);
+      }
+      else
+      {
+        printf("\nPaciente não encontrado!\n");
+      }
+      break;
+    }
+    case 2:
+    {
+      Registro *paciente = desenfileirar(fila);
+      if (paciente != NULL)
+      {
+        printf("\n%s atendido(a)!\n", paciente->nome);
+      }
+      else
+      {
+        printf("\nFila vazia!\n");
+      }
+      break;
+    }
+    case 3:
+      mostrar_fila(fila);
+      break;
+    case 0:
+      return;
+    default:
+      printf("\nOpção inválida!\n");
+    }
+  } while (opcao != 0);
+}
+
 int main()
 {
+  Fila fila_atendimento;
   Lista lista_pacientes;
   inicializar_lista(&lista_pacientes);
 
@@ -101,7 +161,7 @@ int main()
       submenu_cadastrar(&lista_pacientes);
       break;
     case 2:
-      printf("Atendimento (a ser implementado)\n");
+      submenu_atendimento(&lista_pacientes, &fila_atendimento);
       break;
     case 3:
       printf("Atendimento prioritário (a ser implementado)\n");
