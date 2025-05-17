@@ -54,3 +54,14 @@ void liberar_lista(Lista* lista) {
     lista->inicio = NULL;
     lista->qtde = 0;
 }
+
+Registro* consultar_paciente(Lista* lista, char rg[]) {
+    Elista* atual = lista->inicio;
+    while (atual != NULL) {
+        if (strcmp(atual->dados->rg, rg) == 0) {
+            return atual->dados; // Retorna o paciente se encontrado
+        }
+        atual = atual->proximo;
+    }
+    return NULL; // Retorna NULL se não encontrado
+}
