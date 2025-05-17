@@ -67,6 +67,9 @@ void submenu_cadastrar(Lista *lista)
     case 3:
       mostrar_lista_completa(lista); // Já está lá!
       break;
+    case 4:
+      atualizar_paciente(lista);
+      break;
     case 0:
       return;
     default:
