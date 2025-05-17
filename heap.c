@@ -62,3 +62,19 @@ Registro* desenfileirar_heap(Heap* heap) {
 
     return paciente;
 }
+
+void mostrar_heap(Heap* heap) {
+    if (heap->qtde == 0) {
+        printf("\n--- FILA PRIORITÁRIA VAZIA ---\n");
+        return;
+    }
+
+    printf("\n--- FILA PRIORITÁRIA (Ordenada por Idade) ---\n");
+    for (int i = 0; i < heap->qtde; i++) {
+        printf("[%d] %s (Idade: %d, RG: %s)\n", 
+               i+1,
+               heap->dados[i]->nome,
+               heap->dados[i]->idade,
+               heap->dados[i]->rg);
+    }
+}

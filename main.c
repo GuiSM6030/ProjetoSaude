@@ -182,6 +182,9 @@ void submenu_atendimento_prioritario(Lista* lista, Heap* heap_prioritario) {  //
                 }
                 break;
             }
+            case 3:
+    mostrar_heap(heap_prioritario);
+    break;
             case 0:
                 return;
             default:
