@@ -146,7 +146,7 @@ void submenu_atendimento(Lista *lista, Fila *fila)
   } while (opcao != 0);
 }
 
-void submenu_atendimento_prioritario() {
+void submenu_atendimento_prioritario(Lista* lista, Heap* heap_prioritario) {  // Renomeei o parâmetro
     int opcao;
     do {
         printf("\n--- ATENDIMENTO PRIORITÁRIO ---\n");
@@ -164,12 +164,21 @@ void submenu_atendimento_prioritario() {
                 char rg[20];
                 printf("\nDigite o RG do paciente: ");
                 scanf("%s", rg);
-                Registro* paciente = consultar_paciente(&lista_pacientes, rg);
+                Registro* paciente = consultar_paciente(lista, rg);
                 if (paciente != NULL) {
-                    enfileirar_heap(&heap_prioritario, paciente);
+                    enfileirar_heap(heap_prioritario, paciente);  // Usando o parâmetro renomeado
                     printf("\n%s entrou na fila prioritária!\n", paciente->nome);
                 } else {
                     printf("\nPaciente não encontrado!\n");
+                }
+                break;
+            }
+            case 2: {
+                Registro* paciente = desenfileirar_heap(heap_prioritario);  // Aqui estava o erro
+                if (paciente != NULL) {
+                    printf("\n%s atendido(a)!\n", paciente->nome);
+                } else {
+                    printf("\nFila prioritária vazia!\n");
                 }
                 break;
             }

@@ -31,3 +31,34 @@ void enfileirar_heap(Heap* heap, Registro* paciente) {
 void liberar_heap(Heap* heap) {
     free(heap->dados);
 }
+
+void descer_heap(Heap* heap, int indice) {
+    int esq = 2 * indice + 1;
+    int dir = 2 * indice + 2;
+    int maior = indice;
+
+    if (esq < heap->qtde && heap->dados[esq]->idade > heap->dados[maior]->idade) {
+        maior = esq;
+    }
+    if (dir < heap->qtde && heap->dados[dir]->idade > heap->dados[maior]->idade) {
+        maior = dir;
+    }
+
+    if (maior != indice) {
+        Registro* temp = heap->dados[indice];
+        heap->dados[indice] = heap->dados[maior];
+        heap->dados[maior] = temp;
+        descer_heap(heap, maior);
+    }
+}
+
+Registro* desenfileirar_heap(Heap* heap) {
+    if (heap->qtde == 0) return NULL;
+
+    Registro* paciente = heap->dados[0];
+    heap->dados[0] = heap->dados[heap->qtde - 1];
+    heap->qtde--;
+    descer_heap(heap, 0);
+
+    return paciente;
+}
