@@ -18,6 +18,7 @@ typedef struct {
 void inicializar_lista(Lista* lista);
 void cadastrar_paciente(Lista* lista);
 void liberar_lista(Lista* lista);
+void mostrar_lista_completa(Lista* lista);
 
 Registro* consultar_paciente(Lista* lista, char rg[]);
 

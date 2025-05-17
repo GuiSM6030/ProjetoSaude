@@ -65,7 +65,7 @@ void submenu_cadastrar(Lista *lista)
       break;
     }
     case 3:
-      printf("Lista\n");
+      mostrar_lista_completa(lista); // Já está lá!
       break;
     case 0:
       return;

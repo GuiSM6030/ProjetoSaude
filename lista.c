@@ -65,3 +65,27 @@ Registro* consultar_paciente(Lista* lista, char rg[]) {
     }
     return NULL; // Retorna NULL se não encontrado
 }
+
+void mostrar_lista_completa(Lista* lista) {
+    if (lista->inicio == NULL) {
+        printf("\n--- LISTA VAZIA ---\nNenhum paciente cadastrado.\n");
+        return;
+    }
+
+    printf("\n--- LISTA COMPLETA DE PACIENTES ---\n");
+    Elista* atual = lista->inicio;
+    int contador = 1;
+
+    while (atual != NULL) {
+        printf("\n[%d] Nome: %s\n", contador, atual->dados->nome);
+        printf("    RG: %s\n", atual->dados->rg);
+        printf("    Idade: %d\n", atual->dados->idade);
+        printf("    Data de entrada: %02d/%02d/%04d\n",
+               atual->dados->entrada->dia,
+               atual->dados->entrada->mes,
+               atual->dados->entrada->ano);
+        atual = atual->proximo;
+        contador++;
+    }
+    printf("\nTotal: %d paciente(s)\n", lista->qtde);
+}
