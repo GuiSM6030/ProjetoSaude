@@ -2,6 +2,12 @@
 #include <stdlib.h>
 #include "lista.h"
 #include "fila.h"
+#include "heap.h"
+
+
+  Fila fila_atendimento;
+  Lista lista_pacientes;
+  Heap heap_prioritario;
 
 void mostrar_menu()
 {
@@ -140,11 +146,48 @@ void submenu_atendimento(Lista *lista, Fila *fila)
   } while (opcao != 0);
 }
 
+void submenu_atendimento_prioritario() {
+    int opcao;
+    do {
+        printf("\n--- ATENDIMENTO PRIORITÁRIO ---\n");
+        printf("1. Enfileirar paciente\n");
+        printf("2. Desenfileirar paciente\n");
+        printf("3. Mostrar fila\n");
+        printf("0. Voltar\n");
+        printf("Escolha: ");
+        scanf("%d", &opcao);
+
+        while (getchar() != '\n');
+
+        switch (opcao) {
+            case 1: {
+                char rg[20];
+                printf("\nDigite o RG do paciente: ");
+                scanf("%s", rg);
+                Registro* paciente = consultar_paciente(&lista_pacientes, rg);
+                if (paciente != NULL) {
+                    enfileirar_heap(&heap_prioritario, paciente);
+                    printf("\n%s entrou na fila prioritária!\n", paciente->nome);
+                } else {
+                    printf("\nPaciente não encontrado!\n");
+                }
+                break;
+            }
+            case 0:
+                return;
+            default:
+                printf("\nOpção inválida!\n");
+        }
+    } while (opcao != 0);
+}
+
 int main()
 {
-  Fila fila_atendimento;
-  Lista lista_pacientes;
-  inicializar_lista(&lista_pacientes);
+
+
+    inicializar_lista(&lista_pacientes);
+  inicializar_heap(&heap_prioritario, 20);
+
 
   int opcao;
   do
@@ -163,9 +206,9 @@ int main()
     case 2:
       submenu_atendimento(&lista_pacientes, &fila_atendimento);
       break;
-    case 3:
-      printf("Atendimento prioritário (a ser implementado)\n");
-      break;
+case 3:
+    submenu_atendimento_prioritario(&lista_pacientes, &heap_prioritario);
+    break;
     case 4:
       printf("Pesquisa (a ser implementado)\n");
       break;
