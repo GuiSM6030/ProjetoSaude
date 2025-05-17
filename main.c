@@ -70,6 +70,9 @@ void submenu_cadastrar(Lista *lista)
     case 4:
       atualizar_paciente(lista);
       break;
+    case 5:
+      remover_paciente(lista);
+      break;
     case 0:
       return;
     default:

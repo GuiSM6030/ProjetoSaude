@@ -22,6 +22,7 @@ void cadastrar_paciente(Lista *lista);
 void liberar_lista(Lista *lista);
 void mostrar_lista_completa(Lista *lista);
 void atualizar_paciente(Lista *lista);
+void remover_paciente(Lista* lista);
 
 Registro *consultar_paciente(Lista *lista, char rg[]);
 

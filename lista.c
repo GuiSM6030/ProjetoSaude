@@ -158,3 +158,43 @@ void atualizar_paciente(Lista *lista)
     }
     printf("\nPaciente com RG %s não encontrado.\n", rg_atualizar);
 }
+
+void remover_paciente(Lista* lista) {
+    if (lista->inicio == NULL) {
+        printf("\nLista vazia! Nenhum paciente para remover.\n");
+        return;
+    }
+
+    char rg_remover[20];
+    printf("\nDigite o RG do paciente que deseja remover: ");
+    scanf("%s", rg_remover);
+
+    Elista* atual = lista->inicio;
+    Elista* anterior = NULL;
+
+    while (atual != NULL) {
+        if (strcmp(atual->dados->rg, rg_remover) == 0) {
+            printf("\n--- REMOVENDO PACIENTE ---\n");
+            printf("Nome: %s\n", atual->dados->nome);
+            printf("RG: %s\n", atual->dados->rg);
+
+            // Ajusta os ponteiros da lista
+            if (anterior == NULL) {
+                lista->inicio = atual->proximo; // Remove o primeiro
+            } else {
+                anterior->proximo = atual->proximo; // Remove no meio/fim
+            }
+
+            // Libera a memória
+            liberar_registro(atual->dados);
+            free(atual);
+            lista->qtde--;
+
+            printf("\nPaciente removido com sucesso!\n");
+            return;
+        }
+        anterior = atual;
+        atual = atual->proximo;
+    }
+    printf("\nPaciente com RG %s não encontrado.\n", rg_remover);
+}
