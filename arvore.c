@@ -98,3 +98,29 @@ void mostrar_em_ordem_dia(NoArvore* raiz) {
         mostrar_em_ordem_dia(raiz->dir);
     }
 }
+
+void inserir_por_idade(NoArvore** raiz, Registro* paciente) {
+    if (*raiz == NULL) {
+        *raiz = (NoArvore*)malloc(sizeof(NoArvore));
+        (*raiz)->dado = paciente;
+        (*raiz)->esq = NULL;
+        (*raiz)->dir = NULL;
+    } else {
+        if (paciente->idade < (*raiz)->dado->idade) {
+            inserir_por_idade(&(*raiz)->esq, paciente);
+        } else {
+            inserir_por_idade(&(*raiz)->dir, paciente);
+        }
+    }
+}
+
+void mostrar_em_ordem_idade(NoArvore* raiz) {
+    if (raiz != NULL) {
+        mostrar_em_ordem_idade(raiz->esq);
+        printf("Idade: %2d - %s (RG: %s)\n",
+               raiz->dado->idade,
+               raiz->dado->nome,
+               raiz->dado->rg);
+        mostrar_em_ordem_idade(raiz->dir);
+    }
+}

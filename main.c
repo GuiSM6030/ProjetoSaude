@@ -12,6 +12,7 @@
   NoArvore* arvore_ano = NULL;
   NoArvore* arvore_mes = NULL;
   NoArvore* arvore_dia = NULL;
+  NoArvore* arvore_idade = NULL;
 
 void mostrar_menu()
 {
@@ -254,6 +255,24 @@ case 3:
         printf("Nenhum paciente cadastrado.\n");
     } else {
         mostrar_em_ordem_dia(arvore_dia);
+    }
+    break;
+    case 4:
+    liberar_arvore(arvore_idade);
+    arvore_idade = NULL;
+    
+    printf("\nOrdenando por idade...\n");
+    Elista* atual = lista_pacientes.inicio;
+    while (atual != NULL) {
+        inserir_por_idade(&arvore_idade, atual->dados);
+        atual = atual->proximo;
+    }
+    
+    printf("\n--- PACIENTES POR IDADE ---\n");
+    if (arvore_idade == NULL) {
+        printf("Nenhum paciente cadastrado.\n");
+    } else {
+        mostrar_em_ordem_idade(arvore_idade);
     }
     break;
             case 0:

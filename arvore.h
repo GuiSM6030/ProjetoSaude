@@ -19,4 +19,7 @@ void mostrar_em_ordem_mes(NoArvore* raiz);
 void inserir_por_dia(NoArvore** raiz, Registro* paciente);
 void mostrar_em_ordem_dia(NoArvore* raiz);
 
+void inserir_por_idade(NoArvore** raiz, Registro* paciente);
+void mostrar_em_ordem_idade(NoArvore* raiz);
+
 #endif
