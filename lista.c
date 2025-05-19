@@ -4,12 +4,14 @@
 #include <stdlib.h>
 #include <string.h>
 
+// inicia a lista vazia
 void inicializar_lista(Lista *lista)
 {
     lista->inicio = NULL;
     lista->qtde = 0;
 }
 
+// cadastra um paciente novo e joga no inicio da lista
 void cadastrar_paciente(Lista *lista)
 {
     printf("\n--- CADASTRO DE PACIENTE ---\n");
@@ -45,6 +47,7 @@ void cadastrar_paciente(Lista *lista)
     printf("\nPaciente cadastrado com sucesso!\n");
 }
 
+// libera geral da memoria da lista
 void liberar_lista(Lista *lista)
 {
     Elista *atual = lista->inicio;
@@ -59,6 +62,7 @@ void liberar_lista(Lista *lista)
     lista->qtde = 0;
 }
 
+// busca paciente pelo rg
 Registro *consultar_paciente(Lista *lista, char rg[])
 {
     Elista *atual = lista->inicio;
@@ -73,6 +77,7 @@ Registro *consultar_paciente(Lista *lista, char rg[])
     return NULL; // Retorna NULL se não encontrado
 }
 
+// mostra todos os pacientes da lista
 void mostrar_lista_completa(Lista *lista)
 {
     if (lista->inicio == NULL)
@@ -100,6 +105,7 @@ void mostrar_lista_completa(Lista *lista)
     printf("\nTotal: %d paciente(s)\n", lista->qtde);
 }
 
+// edita paciente se achar pelo rg
 void atualizar_paciente(Lista *lista)
 {
     char rg_atualizar[20];
@@ -159,6 +165,7 @@ void atualizar_paciente(Lista *lista)
     printf("\nPaciente com RG %s não encontrado.\n", rg_atualizar);
 }
 
+// remove paciente pelo rg se achar
 void remover_paciente(Lista* lista) {
     if (lista->inicio == NULL) {
         printf("\nLista vazia! Nenhum paciente para remover.\n");
@@ -199,7 +206,7 @@ void remover_paciente(Lista* lista) {
     printf("\nPaciente com RG %s não encontrado.\n", rg_remover);
 }
 
-// lista.c
+// salva lista em arquivo texto
 void salvar_lista_arquivo(Lista* lista, const char* nome_arquivo) {
     FILE* arquivo = fopen(nome_arquivo, "w");
     if (arquivo == NULL) {
@@ -223,6 +230,7 @@ void salvar_lista_arquivo(Lista* lista, const char* nome_arquivo) {
     printf("Dados salvos em '%s'!\n", nome_arquivo);
 }
 
+// carrega dados do arquivo e monta a lista
 void carregar_lista_arquivo(Lista* lista, const char* nome_arquivo) {
     FILE* arquivo = fopen(nome_arquivo, "r");
     if (arquivo == NULL) {
@@ -251,6 +259,7 @@ void carregar_lista_arquivo(Lista* lista, const char* nome_arquivo) {
     printf("Dados carregados de '%s'!\n", nome_arquivo);
 }
 
+// insere paciente no inicio da lista (usado pelo carregar)
 void inserir_lista(Lista* lista, Registro* registro) {
     Elista* novo = (Elista*)malloc(sizeof(Elista));
     novo->dados = registro;

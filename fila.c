@@ -2,6 +2,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 
+// inicia a fila zerada
 void inicializar_fila(Fila *fila)
 {
     fila->head = NULL;
@@ -9,6 +10,7 @@ void inicializar_fila(Fila *fila)
     fila->qtde = 0;
 }
 
+// joga paciente no fim da fila
 void enfileirar(Fila *fila, Registro *paciente)
 {
     EFila *novo = (EFila *)malloc(sizeof(EFila));
@@ -16,7 +18,7 @@ void enfileirar(Fila *fila, Registro *paciente)
     novo->proximo = NULL;
 
     if (fila->tail == NULL)
-    { // Fila vazia
+    { // fila ta vazia
         fila->head = novo;
     }
     else
@@ -27,23 +29,25 @@ void enfileirar(Fila *fila, Registro *paciente)
     fila->qtde++;
 }
 
+// tira paciente do comeco da fila
 Registro *desenfileirar(Fila *fila)
 {
     if (fila->head == NULL)
-        return NULL; // Fila vazia
+        return NULL; // fila vazia
 
     EFila *removido = fila->head;
     Registro *paciente = removido->dados;
 
     fila->head = fila->head->proximo;
     if (fila->head == NULL)
-        fila->tail = NULL; // Fila esvaziou
+        fila->tail = NULL; // fila esvaziou
 
     free(removido);
     fila->qtde--;
     return paciente;
 }
 
+// mostra geral que ta na fila
 void mostrar_fila(Fila *fila)
 {
     if (fila->head == NULL)
@@ -64,6 +68,7 @@ void mostrar_fila(Fila *fila)
     printf("Total na fila: %d\n", fila->qtde);
 }
 
+// libera tudo da memoria
 void liberar_fila(Fila* fila) {
     while (fila->head != NULL) {
         EFila* temp = fila->head;

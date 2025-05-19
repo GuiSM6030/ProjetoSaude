@@ -1,8 +1,8 @@
-// arvore.c
 #include "arvore.h"
 #include <stdio.h>
 #include <stdlib.h>
 
+// insere na arvore pelo ano de entrada
 void inserir_por_ano(NoArvore** raiz, Registro* paciente) {
     if (*raiz == NULL) {
         *raiz = (NoArvore*)malloc(sizeof(NoArvore));
@@ -21,6 +21,7 @@ void inserir_por_ano(NoArvore** raiz, Registro* paciente) {
     }
 }
 
+// mostra pacientes em ordem pelo ano
 void mostrar_em_ordem_ano(NoArvore* raiz) {
     if (raiz != NULL) {
         mostrar_em_ordem_ano(raiz->esq);
@@ -32,6 +33,7 @@ void mostrar_em_ordem_ano(NoArvore* raiz) {
     }
 }
 
+// libera memoria da arvore
 void liberar_arvore(NoArvore* raiz) {
     if (raiz != NULL) {
         liberar_arvore(raiz->esq);
@@ -40,6 +42,7 @@ void liberar_arvore(NoArvore* raiz) {
     }
 }
 
+// insere na arvore pelo mes de entrada
 void inserir_por_mes(NoArvore** raiz, Registro* paciente) {
     if (*raiz == NULL) {
         *raiz = (NoArvore*)malloc(sizeof(NoArvore));
@@ -58,10 +61,11 @@ void inserir_por_mes(NoArvore** raiz, Registro* paciente) {
     }
 }
 
+// mostra pacientes em ordem pelo mes
 void mostrar_em_ordem_mes(NoArvore* raiz) {
     if (raiz != NULL) {
         mostrar_em_ordem_mes(raiz->esq);
-        printf("Mês: %02d - %s (RG: %s)\n", 
+        printf("Mes: %02d - %s (RG: %s)\n", 
                raiz->dado->entrada->mes, 
                raiz->dado->nome, 
                raiz->dado->rg);
@@ -69,6 +73,7 @@ void mostrar_em_ordem_mes(NoArvore* raiz) {
     }
 }
 
+// insere na arvore pelo dia de entrada
 void inserir_por_dia(NoArvore** raiz, Registro* paciente) {
     if (*raiz == NULL) {
         *raiz = (NoArvore*)malloc(sizeof(NoArvore));
@@ -87,10 +92,11 @@ void inserir_por_dia(NoArvore** raiz, Registro* paciente) {
     }
 }
 
+// mostra pacientes em ordem pelo dia
 void mostrar_em_ordem_dia(NoArvore* raiz) {
     if (raiz != NULL) {
         mostrar_em_ordem_dia(raiz->esq);
-        printf("Dia: %02d - %s (Mês: %d, RG: %s)\n", 
+        printf("Dia: %02d - %s (Mes: %d, RG: %s)\n", 
                raiz->dado->entrada->dia,
                raiz->dado->nome,
                raiz->dado->entrada->mes,
@@ -99,6 +105,7 @@ void mostrar_em_ordem_dia(NoArvore* raiz) {
     }
 }
 
+// insere na arvore por idade
 void inserir_por_idade(NoArvore** raiz, Registro* paciente) {
     if (*raiz == NULL) {
         *raiz = (NoArvore*)malloc(sizeof(NoArvore));
@@ -114,6 +121,7 @@ void inserir_por_idade(NoArvore** raiz, Registro* paciente) {
     }
 }
 
+// mostra pacientes em ordem pela idade
 void mostrar_em_ordem_idade(NoArvore* raiz) {
     if (raiz != NULL) {
         mostrar_em_ordem_idade(raiz->esq);
