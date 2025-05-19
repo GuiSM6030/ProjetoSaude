@@ -1,3 +1,4 @@
+//bibliotecas ultilizadas
 #include <stdio.h>
 #include <stdlib.h>
 #include "lista.h"
@@ -6,7 +7,7 @@
 #include "pilha.h"
 #include "arvore.h"
 
-// Variáveis globais
+// variaveis que vao ser usadas em todo o programa
 Fila fila_atendimento;
 Lista lista_pacientes;
 Heap heap_prioritario;
@@ -16,6 +17,7 @@ NoArvore* arvore_dia = NULL;
 NoArvore* arvore_idade = NULL;
 PilhaOperacoes log_operacoes;
 
+//menu principal
 void mostrar_menu() {
     printf("\n-- ATENDIMENTO DE SAÚDE --\n");
     printf("\n---- Hospital da FEI ----\n");
@@ -30,6 +32,7 @@ void mostrar_menu() {
     printf("Escolha uma opcao: ");
 }
 
+//submenu cadastrar (ultiliza lista dinamica encadeada)
 void submenu_cadastrar(Lista *lista) {
     int opcao;
     do {
@@ -85,11 +88,13 @@ void submenu_cadastrar(Lista *lista) {
     } while (opcao != 0);
 }
 
+// joga paciente na fila normal e salva essa ação no log
 void enfileirar_paciente_fila(Fila* fila, Registro* paciente, PilhaOperacoes* log) {
     enfileirar(fila, paciente);
     registrar_operacao(log, ENFILEIRAR, paciente);
 }
 
+// tira paciente da fila normal e salva no log tbm
 Registro* desenfileirar_paciente_fila(Fila* fila, PilhaOperacoes* log) {
     Registro* paciente = desenfileirar(fila);
     if (paciente != NULL) {
@@ -98,6 +103,7 @@ Registro* desenfileirar_paciente_fila(Fila* fila, PilhaOperacoes* log) {
     return paciente;
 }
 
+// submenu do atendimento normal (fila)
 void submenu_atendimento(Lista *lista, Fila *fila, PilhaOperacoes* log) {
     int opcao;
     do {
@@ -145,6 +151,7 @@ void submenu_atendimento(Lista *lista, Fila *fila, PilhaOperacoes* log) {
     } while (opcao != 0);
 }
 
+// atendimento prioritário (usa heap)
 void submenu_atendimento_prioritario(Lista* lista, Heap* heap) {
     int opcao;
     do {
@@ -192,6 +199,7 @@ void submenu_atendimento_prioritario(Lista* lista, Heap* heap) {
     } while (opcao != 0);
 }
 
+//submenu pesquisa (usa arvore binaria)
 void submenu_pesquisa() {
     int opcao;
     do {
@@ -263,6 +271,7 @@ void submenu_pesquisa() {
     } while (opcao != 0);
 }
 
+//submenu dezfazer (ultilza pilha)
 void submenu_desfazer(Fila* fila, PilhaOperacoes* log) {
     int opcao;
     do {
@@ -313,6 +322,8 @@ void submenu_desfazer(Fila* fila, PilhaOperacoes* log) {
     } while (opcao != 0);
 }
 
+
+//le e salva arquvi com dados dos pscientes
 void submenu_carregar_salvar(Lista* lista) {
     int opcao;
     char nome_arquivo[100];
@@ -346,6 +357,8 @@ void submenu_carregar_salvar(Lista* lista) {
     } while (opcao != 0);
 }
 
+
+//dados projeto
 void mostrar_sobre() {
     printf("\n--- SOBRE O PROJETO ---\n");
     printf("Gerenciador de Atendimento Médico\n");
