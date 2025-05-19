@@ -250,3 +250,11 @@ void carregar_lista_arquivo(Lista* lista, const char* nome_arquivo) {
     fclose(arquivo);
     printf("Dados carregados de '%s'!\n", nome_arquivo);
 }
+
+void inserir_lista(Lista* lista, Registro* registro) {
+    Elista* novo = (Elista*)malloc(sizeof(Elista));
+    novo->dados = registro;
+    novo->proximo = lista->inicio;
+    lista->inicio = novo;
+    lista->qtde++;
+}

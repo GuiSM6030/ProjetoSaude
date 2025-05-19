@@ -345,6 +345,24 @@ void submenu_carregar_salvar(Lista* lista) {
         }
     } while (opcao != 0);
 }
+
+void mostrar_sobre() {
+    printf("\n--- SOBRE O PROJETO ---\n");
+    printf("Gerenciador de Atendimento Médico\n");
+    printf("Desenvolvido por: Guilherme Silva Meireles || Natasha Almeida Trindade\n");
+    printf("Matrícula/RM:     22.123.094-9             || 22.123.084-0\n");
+    printf("Curso: Ciência da Computação\n");
+    printf("Disciplina: Estrutura de Dados\n");
+    printf("Professor: Luciano Rossi\n");
+    printf("Instituição: Centro Universitário FEI\n");
+    printf("Semestre: 4º/2025\n");
+    printf("\nEste sistema gerencia:\n");
+    printf("- Cadastro de pacientes\n");
+    printf("- Atendimento regular e prioritário\n");
+    printf("- Pesquisas personalizadas\n");
+    printf("- Histórico de operações\n");
+}
+
 int main() {
     // Inicializa todas as estruturas
     inicializar_pilha(&log_operacoes);
@@ -379,7 +397,7 @@ case 6:
     submenu_carregar_salvar(&lista_pacientes);
     break;
             case 7:
-                printf("Sobre (a ser implementado)\n");
+                mostrar_sobre();
                 break;
             case 0:
                 printf("Saindo do sistema...\n");
