@@ -1,4 +1,3 @@
-// lista.h
 #ifndef LISTA_H
 #define LISTA_H
 
@@ -23,6 +22,8 @@ void liberar_lista(Lista *lista);
 void mostrar_lista_completa(Lista *lista);
 void atualizar_paciente(Lista *lista);
 void remover_paciente(Lista* lista);
+void salvar_lista_arquivo(Lista* lista, const char* nome_arquivo);
+void carregar_lista_arquivo(Lista* lista, const char* nome_arquivo);
 
 Registro *consultar_paciente(Lista *lista, char rg[]);
 
