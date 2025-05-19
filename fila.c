@@ -63,3 +63,13 @@ void mostrar_fila(Fila *fila)
     }
     printf("Total na fila: %d\n", fila->qtde);
 }
+
+void liberar_fila(Fila* fila) {
+    while (fila->head != NULL) {
+        EFila* temp = fila->head;
+        fila->head = fila->head->proximo;
+        free(temp);
+    }
+    fila->tail = NULL;
+    fila->qtde = 0;
+}
