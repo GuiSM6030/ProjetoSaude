@@ -1,6 +1,8 @@
 # Gerenciador de Serviços de Saude
 Projeto de Estrutura de Dados em linguagem C
+
 Centro Universitário FEI | Ciência da Computação
+
 Prof. Luciano Rossi
 
 ## Sobre o projeto
@@ -19,7 +21,7 @@ Este projeto tem como objetivo simular o funcionamento de um sistema de atendime
 - Enfileirar pacientes para atendimento
 - Desenfileirar pacientes
 - Ver a fila completa (primeiro a chegar, primeiro a ser atendido)
-- Estrutura: fils
+- Estrutura: fila
 
 ### Atendimento Prioritário
 - Baseado em idade (quanto mais velho, maior a prioridade)
