@@ -313,6 +313,38 @@ void submenu_desfazer(Fila* fila, PilhaOperacoes* log) {
     } while (opcao != 0);
 }
 
+void submenu_carregar_salvar(Lista* lista) {
+    int opcao;
+    char nome_arquivo[100];
+
+    do {
+        printf("\n--- CARREGAR/SALVAR ---\n");
+        printf("1. Carregar dados\n");
+        printf("2. Salvar dados\n");
+        printf("0. Voltar\n");
+        printf("Escolha: ");
+        scanf("%d", &opcao);
+
+        while (getchar() != '\n');
+
+        switch (opcao) {
+            case 1:
+                printf("\nDigite o nome do arquivo para carregar: ");
+                scanf("%99s", nome_arquivo);
+                carregar_lista_arquivo(lista, nome_arquivo);
+                break;
+            case 2:
+                printf("\nDigite o nome do arquivo para salvar: ");
+                scanf("%99s", nome_arquivo);
+                salvar_lista_arquivo(lista, nome_arquivo);
+                break;
+            case 0:
+                return;
+            default:
+                printf("Opção inválida!\n");
+        }
+    } while (opcao != 0);
+}
 int main() {
     // Inicializa todas as estruturas
     inicializar_pilha(&log_operacoes);
@@ -343,9 +375,9 @@ int main() {
             case 5:
                 submenu_desfazer(&fila_atendimento, &log_operacoes);
                 break;
-            case 6:
-                printf("Carregar / Salvar (a ser implementado)\n");
-                break;
+case 6:
+    submenu_carregar_salvar(&lista_pacientes);
+    break;
             case 7:
                 printf("Sobre (a ser implementado)\n");
                 break;

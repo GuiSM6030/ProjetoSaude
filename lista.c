@@ -198,3 +198,55 @@ void remover_paciente(Lista* lista) {
     }
     printf("\nPaciente com RG %s não encontrado.\n", rg_remover);
 }
+
+// lista.c
+void salvar_lista_arquivo(Lista* lista, const char* nome_arquivo) {
+    FILE* arquivo = fopen(nome_arquivo, "w");
+    if (arquivo == NULL) {
+        printf("Erro ao abrir arquivo para escrita!\n");
+        return;
+    }
+
+    Elista* atual = lista->inicio;
+    while (atual != NULL) {
+        fprintf(arquivo, "%s;%d;%s;%d;%d;%d\n",
+                atual->dados->nome,
+                atual->dados->idade,
+                atual->dados->rg,
+                atual->dados->entrada->dia,
+                atual->dados->entrada->mes,
+                atual->dados->entrada->ano);
+        atual = atual->proximo;
+    }
+
+    fclose(arquivo);
+    printf("Dados salvos em '%s'!\n", nome_arquivo);
+}
+
+void carregar_lista_arquivo(Lista* lista, const char* nome_arquivo) {
+    FILE* arquivo = fopen(nome_arquivo, "r");
+    if (arquivo == NULL) {
+        printf("Arquivo '%s' não encontrado!\n", nome_arquivo);
+        return;
+    }
+
+    // Limpa a lista atual antes de carregar
+    liberar_lista(lista);
+    inicializar_lista(lista);
+
+    char linha[256];
+    while (fgets(linha, sizeof(linha), arquivo)) {
+        char nome[100], rg[20];
+        int idade, dia, mes, ano;
+
+        if (sscanf(linha, "%[^;];%d;%[^;];%d;%d;%d",
+                   nome, &idade, rg, &dia, &mes, &ano) == 6) {
+            Data* entrada = criar_data(dia, mes, ano);
+            Registro* paciente = criar_registro(nome, idade, rg, entrada);
+            inserir_lista(lista, paciente);
+        }
+    }
+
+    fclose(arquivo);
+    printf("Dados carregados de '%s'!\n", nome_arquivo);
+}
