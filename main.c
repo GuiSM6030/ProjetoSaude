@@ -3,11 +3,13 @@
 #include "lista.h"
 #include "fila.h"
 #include "heap.h"
+#include "arvore.h"
 
 
   Fila fila_atendimento;
   Lista lista_pacientes;
   Heap heap_prioritario;
+  NoArvore* arvore_ano = NULL;
 
 void mostrar_menu()
 {
@@ -193,6 +195,42 @@ void submenu_atendimento_prioritario(Lista* lista, Heap* heap_prioritario) {  //
     } while (opcao != 0);
 }
 
+void submenu_pesquisa() {
+    int opcao;
+    do {
+        printf("\n--- PESQUISA ---\n");
+        printf("1. Por ano de registro\n");
+        printf("2. Por mês\n");
+        printf("3. Por dia\n");
+        printf("4. Por idade\n");
+        printf("0. Voltar\n");
+        printf("Escolha: ");
+        scanf("%d", &opcao);
+
+        while (getchar() != '\n');
+
+        switch (opcao) {
+            case 1:
+                if (arvore_ano == NULL) {
+                    printf("\nConstruindo árvore...\n");
+                    // Percorre a lista e insere na árvore
+                    Elista* atual = lista_pacientes.inicio;
+                    while (atual != NULL) {
+                        inserir_por_ano(&arvore_ano, atual->dados);
+                        atual = atual->proximo;
+                    }
+                }
+                printf("\n--- PACIENTES POR ANO ---\n");
+                mostrar_em_ordem_ano(arvore_ano);
+                break;
+            case 0:
+                return;
+            default:
+                printf("\nOpção inválida!\n");
+        }
+    } while (opcao != 0);
+}
+
 int main()
 {
 
@@ -221,9 +259,9 @@ int main()
 case 3:
     submenu_atendimento_prioritario(&lista_pacientes, &heap_prioritario);
     break;
-    case 4:
-      printf("Pesquisa (a ser implementado)\n");
-      break;
+case 4:
+    submenu_pesquisa();
+    break;
     case 5:
       printf("Desfazer (a ser implementado)\n");
       break;
