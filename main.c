@@ -10,6 +10,7 @@
   Lista lista_pacientes;
   Heap heap_prioritario;
   NoArvore* arvore_ano = NULL;
+  NoArvore* arvore_mes = NULL;
 
 void mostrar_menu()
 {
@@ -223,6 +224,18 @@ void submenu_pesquisa() {
                 printf("\n--- PACIENTES POR ANO ---\n");
                 mostrar_em_ordem_ano(arvore_ano);
                 break;
+                case 2:
+    if (arvore_mes == NULL) {
+        printf("\nConstruindo árvore por mês...\n");
+        Elista* atual = lista_pacientes.inicio;
+        while (atual != NULL) {
+            inserir_por_mes(&arvore_mes, atual->dados);
+            atual = atual->proximo;
+        }
+    }
+    printf("\n--- PACIENTES POR MÊS ---\n");
+    mostrar_em_ordem_mes(arvore_mes);
+    break;
             case 0:
                 return;
             default:

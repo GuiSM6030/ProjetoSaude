@@ -39,3 +39,32 @@ void liberar_arvore(NoArvore* raiz) {
         free(raiz);
     }
 }
+
+void inserir_por_mes(NoArvore** raiz, Registro* paciente) {
+    if (*raiz == NULL) {
+        *raiz = (NoArvore*)malloc(sizeof(NoArvore));
+        (*raiz)->dado = paciente;
+        (*raiz)->esq = NULL;
+        (*raiz)->dir = NULL;
+    } else {
+        int mes_paciente = paciente->entrada->mes;
+        int mes_raiz = (*raiz)->dado->entrada->mes;
+        
+        if (mes_paciente < mes_raiz) {
+            inserir_por_mes(&(*raiz)->esq, paciente);
+        } else {
+            inserir_por_mes(&(*raiz)->dir, paciente);
+        }
+    }
+}
+
+void mostrar_em_ordem_mes(NoArvore* raiz) {
+    if (raiz != NULL) {
+        mostrar_em_ordem_mes(raiz->esq);
+        printf("Mês: %02d - %s (RG: %s)\n", 
+               raiz->dado->entrada->mes, 
+               raiz->dado->nome, 
+               raiz->dado->rg);
+        mostrar_em_ordem_mes(raiz->dir);
+    }
+}
