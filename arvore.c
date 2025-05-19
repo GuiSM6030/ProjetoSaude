@@ -68,3 +68,33 @@ void mostrar_em_ordem_mes(NoArvore* raiz) {
         mostrar_em_ordem_mes(raiz->dir);
     }
 }
+
+void inserir_por_dia(NoArvore** raiz, Registro* paciente) {
+    if (*raiz == NULL) {
+        *raiz = (NoArvore*)malloc(sizeof(NoArvore));
+        (*raiz)->dado = paciente;
+        (*raiz)->esq = NULL;
+        (*raiz)->dir = NULL;
+    } else {
+        int dia_paciente = paciente->entrada->dia;
+        int dia_raiz = (*raiz)->dado->entrada->dia;
+        
+        if (dia_paciente < dia_raiz) {
+            inserir_por_dia(&(*raiz)->esq, paciente);
+        } else {
+            inserir_por_dia(&(*raiz)->dir, paciente);
+        }
+    }
+}
+
+void mostrar_em_ordem_dia(NoArvore* raiz) {
+    if (raiz != NULL) {
+        mostrar_em_ordem_dia(raiz->esq);
+        printf("Dia: %02d - %s (Mês: %d, RG: %s)\n", 
+               raiz->dado->entrada->dia,
+               raiz->dado->nome,
+               raiz->dado->entrada->mes,
+               raiz->dado->rg);
+        mostrar_em_ordem_dia(raiz->dir);
+    }
+}

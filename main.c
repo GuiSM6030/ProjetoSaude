@@ -11,6 +11,7 @@
   Heap heap_prioritario;
   NoArvore* arvore_ano = NULL;
   NoArvore* arvore_mes = NULL;
+  NoArvore* arvore_dia = NULL;
 
 void mostrar_menu()
 {
@@ -235,6 +236,25 @@ void submenu_pesquisa() {
     }
     printf("\n--- PACIENTES POR MÊS ---\n");
     mostrar_em_ordem_mes(arvore_mes);
+    break;
+case 3: 
+    // a gente usa pra liberar a árvore antiga antes de criar outa
+    liberar_arvore(arvore_dia);
+    arvore_dia = NULL; 
+
+    printf("\nConstruindo árvore por dia...\n");
+    Elista* atual = lista_pacientes.inicio;
+    while (atual != NULL) {
+        inserir_por_dia(&arvore_dia, atual->dados);
+        atual = atual->proximo;
+    }
+
+    printf("\n--- PACIENTES ORDENADOS POR DIA ---\n");
+    if (arvore_dia == NULL) {
+        printf("Nenhum paciente cadastrado.\n");
+    } else {
+        mostrar_em_ordem_dia(arvore_dia);
+    }
     break;
             case 0:
                 return;
